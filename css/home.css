@@ -1,0 +1,99 @@
+body {
+    background-color: rgb(34, 31, 31);
+}
+
+.btnsDayAndWeekDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.btnDayAndWeek {
+    background-color: rgb(40, 43, 43);
+    width: 40%;
+    height: 40%;
+    color: rgb(223, 226, 229);
+    font-size: 200%;
+}
+
+.moviesPresentationClass {
+    display: flex;
+    flex-wrap: wrap;  
+    justify-content: space-evenly;
+    gap: 2rem;
+
+}
+
+.movie-card {
+    width: 15%;  
+    margin: 0 1%;
+    box-shadow: 0 4px 20px rgba(255, 251, 251, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+    opacity: 0;
+    animation: fadeIn 0.1s forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+
+.movie-card img {
+    width: 100%;  
+}
+
+.movieTitle {
+    color: aliceblue;
+}
+
+
+.movie-card:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .pagination .page-item {
+    list-style: none;
+    margin: 0 5px;
+  }
+  
+  .pagination .page-link {
+    color: #000;
+    text-decoration: none;
+    border: 1px solid #393434;
+    padding: 5px 10px;
+    border-radius: 3px;
+    background-color: #423c3c;
+  }
+  
+  .pagination .page-item.active .page-link {
+    background-color: #770909;
+    color: #fff;
+    border: 1px solid #320505;
+  }
+  
+  .pagination .page-link:hover {
+    background-color: #7e7575;
+  }
+  
+  .pagination .page-item.disabled .page-link {
+    color: #000000;
+    background-color: rgb(41, 39, 39);
+    border: 1px solid rgb(41, 39, 39);
+
+
+    
+  }
+  
+  .pagination .page-item.disabled .page-link:hover {
+    background-color: transparent;
+  }
