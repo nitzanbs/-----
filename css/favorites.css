@@ -2,29 +2,36 @@ body {
     background-color: rgb(19, 19, 19);
   }
 
-  #movieTitel{
+  #movieTitel {
     font-size: 200%;
     font-weight: 300;
     color: #b30b0b;
     text-shadow: 2px 1px 1px black;
-    font-family:sans-serif;
-    animation:blinkAndMove 3s infinite;
-  }
+    font-family: sans-serif;
+    animation: blinkAndChangeColors 2s infinite;
+}
 
-  @keyframes blinkAndMove {
-    0% {
-      opacity: 1;
-      transform: translateX(0) scale(1);
+@keyframes blinkAndChangeColors {
+    0%, 100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+        color: #b30b0b; 
     }
-    50% {
-      opacity: 0;
-      transform: translateX(10px) scale(0.8);
+    20% {
+        color: #da4b4b;
     }
-    100% {
-      opacity: 1;
-      transform: translateX(0) scale(1);
+    40% {
+        color: #621d1d;
+        text-shadow: 2px 2px 1px rgb(255, 255, 255);
     }
+    60% {
+      color: #e76666; 
   }
+    80% {
+        color: #a91616;
+    }
+}
+
 
   .favoritTitel{
     text-align: center;
