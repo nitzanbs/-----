@@ -20,9 +20,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const heartIconColor = isMovieLiked(movieResult.id) ? '#ff0000' : '';
 
     movieCard.innerHTML = `
-      <p>Title: ${movieResult.title} <i class="heart-icon ${heartIconClass} fa-heart" style="color: #ff0000;"></i></p>
-      <p>Release Date: ${movieResult.release_date}</p>
-      <img style="width:20%; height:auto;" src="https://image.tmdb.org/t/p/original${movieResult.poster_path}" />
+    <img style="width:100%; height:auto;" src="https://image.tmdb.org/t/p/original${movieResult.poster_path}" />
+      <h1>${movieResult.title}</h1>
+    <div><p><i class="heart-icon ${heartIconClass} fa-heart" style="color: #ff0000;"></i></p></div>
+      
     `;
 
     moviesPresentation.appendChild(movieCard);

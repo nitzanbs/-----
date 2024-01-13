@@ -6,22 +6,20 @@ document.addEventListener("DOMContentLoaded", () => {
   function createMovieCard(movieData) {
     const movieCard = document.createElement("div");
     movieCard.className = "movie-card";
-
-    const movieTitle = document.createElement("p");
-    movieTitle.textContent = `Title: ${movieData.title}`;
-
+  
     const moviePoster = document.createElement("img");
     moviePoster.src = `https://image.tmdb.org/t/p/original${movieData.poster_path}`;
-    moviePoster.style.width = "10%";
+    moviePoster.style.width = "100%";
+    moviePoster.style.height = "auto";
     moviePoster.alt = movieData.title;
-
+  
     const heartIcon = document.createElement("i");
     const isLiked = likedMoviesArray.some((movie) => movie.id === movieData.id);
     heartIcon.className = `heart-icon ${
       isLiked ? "fa-solid" : "fa-regular"
     } fa-heart`;
     heartIcon.style.color = isLiked ? "#ff0000" : "";
-
+  
     heartIcon.addEventListener("click", () => {
       const index = likedMoviesArray.findIndex(
         (movie) => movie.id === movieData.id
@@ -34,11 +32,14 @@ document.addEventListener("DOMContentLoaded", () => {
       updateLocalStorage();
       displayLikedMovies();
     });
-
-    movieCard.appendChild(movieTitle);
+  
+    const movieTitle = document.createElement("h1");
+    movieTitle.textContent = `${movieData.title}`;
+  
     movieCard.appendChild(moviePoster);
+    movieCard.appendChild(movieTitle);
     movieCard.appendChild(heartIcon);
-
+  
     return movieCard;
   }
 
@@ -47,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function displayLikedMovies() {
-    likedMoviesList.innerHTML = "<h2>Liked Movies</h2>";
+    likedMoviesList.innerHTML = "";
     const movieCardContainer = document.createElement("div");
     movieCardContainer.className = "movie-card-container";
 
