@@ -14,10 +14,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const heartIconColor = isMovieLiked(data.id) ? '#ff0000' : '';
 
     movieTitle.innerHTML =
-      `<p >Title: ${data.title} <i class="heart-icon ${heartIconClass} fa-heart" style="color: #ff0000;"></i></p>`;
+      `<p >${data.title} <i class="heart-icon ${heartIconClass} fa-heart" style="color: #ff0000;"></i></p>`;
+      MoviePoster.innerHTML =
+      `<img  class="posterImg" src="https://image.tmdb.org/t/p/original${data.poster_path}" />`;
     dateAndRuntime.innerHTML =
-      `<p >Date: ${data.release_date}</p>
-       <p >Runtime: ${data.runtime} min</p>`;
+      `<p ><i class="fa-solid fa-calendar-days"></i>${data.release_date}</p>
+       <p ><i class="fa-regular fa-clock"></i> ${data.runtime} min</p>`;
 
     const heartIcon = movieTitle.querySelector('.heart-icon');
 
@@ -50,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const crewNames = `${crew.job} : ${crew.name}`;
       crewHtml += (i > 0 ? ' , ' : '') + crewNames;
     }
-    movieCrew.innerHTML = `<span>${crewHtml}</span>`;
+    movieCrew.innerHTML = `<div >${crewHtml}</div>`;
 
     let castHtml = '';
 
@@ -60,25 +62,24 @@ document.addEventListener('DOMContentLoaded', () => {
       const actorName = cast.name;
       const profilePath = `https://image.tmdb.org/t/p/original${cast.profile_path}`;
 
-      const imageTag = profilePath ? `<img src="${profilePath}" alt="${actorName}" width="50" height="50">` : '';
+      const imageTag = profilePath ? `<br><img class="imgCast" src="${profilePath}" alt="${actorName}" >` : '';
 
       const slashIndex = characterName.indexOf('/');
 
       if (slashIndex !== -1) {
         const characters = characterName.substring(0, slashIndex);
-        castHtml += (i > 0 ? ' , ' : '') + `${imageTag} ${characters} : ${actorName} `;
+        castHtml += (i > 0 ? '  ' : ' ') + `<div class="imgAndName" >${imageTag} ${characters} - ${actorName}</div> `;
       } else {
-        castHtml += (i > 0 ? ' , ' : '') + `${imageTag} ${characterName} : ${actorName} `;
+        castHtml += (i > 0 ? '  ' : ' ') + `<div class="imgAndName" >${imageTag} ${characterName} - ${actorName} </div>`;
       }
 
       if (i >= 9) {
         break;
       }
     }
-    movieCast.innerHTML = `<span>${castHtml}</span>`;
+    movieCast.innerHTML = `<p class="castTitel">Movie Cast</p><div class="castCard">${castHtml}</div>`;
 
-    MoviePoster.innerHTML =
-      `<img  style="width:20%; height:auto;" src="https://image.tmdb.org/t/p/original${data.poster_path}" />`;
+    
   }
 
   function isMovieLiked(movieId) {

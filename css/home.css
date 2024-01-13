@@ -1,99 +1,196 @@
 body {
-    background-color: rgb(34, 31, 31);
+  background-color: rgb(19, 19, 19);
 }
+
 
 .btnsDayAndWeekDiv {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
+
+/* .btnDayAndWeek {
+  background-color: rgb(124 12 12);
+  width: 20%;
+  height: 40%;
+  color: rgb(223, 226, 229);
+  font-size: 200%;
+  border-radius: 20px ;
+  box-shadow: #000;
+  border: 1.5px solid #ffffff;
+  
+} */
 
 .btnDayAndWeek {
-    background-color: rgb(40, 43, 43);
-    width: 40%;
-    height: 40%;
-    color: rgb(223, 226, 229);
-    font-size: 200%;
+  width: 20%;
+  height: 40%;
+  font-size: 200%;
+  font-weight: bolder;
+  border: none;
+  outline: none;
+  color: #dcd3d3;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 20px;
+  animation: glowing 20s linear infinite;
+
 }
 
-.moviesPresentationClass {
-    display: flex;
-    flex-wrap: wrap;  
-    justify-content: space-evenly;
-    gap: 2rem;
+.btnDayAndWeek:before {
+  content: '';
+  background: linear-gradient(45deg, #ff0000, #de1010, #8c2a2a, #6b2828, #521919, #8c4949, #b17373, #f23131, #ff0000);
+  position: absolute;
+  top: -2px;
+  left:-2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing 20s linear infinite;
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
+  border-radius: 10px;
+}
 
+.btnDayAndWeek:active {
+  color: #000000
+}
+
+.btnDayAndWeek:active:after {
+  background: transparent;
+}
+
+.btnDayAndWeek:hover:before {
+  opacity: 1;
+}
+
+.btnDayAndWeek:after {
+  z-index: -1;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #380707;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+@keyframes glowing {
+  0% { background-position: 0 0; }
+  50% { background-position: 400% 0; }
+  100% { background-position: 0 0; }
+} 
+
+
+.moviesPresentationClass {
+  display: flex;
+  flex-wrap: wrap;  
+  justify-content: space-evenly;
+  gap: 2rem;
 }
 
 .movie-card {
-    width: 15%;  
-    margin: 0 1%;
-    box-shadow: 0 4px 20px rgba(255, 251, 251, 0.1);
-    transition: box-shadow 0.3s ease-in-out;
-    opacity: 0;
-    animation: fadeIn 0.1s forwards;
+  color: rgb(201, 196, 196);
+  width: 15%;  
+  margin: 0 1%;
+  box-shadow: 0 4px 20px rgba(255, 251, 251, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+  opacity: 0;
+  animation: fadeIn 0.1s forwards;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-
 .movie-card img {
-    width: 100%;  
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 }
 
 .movieTitle {
-    color: aliceblue;
+  color: aliceblue;
+  text-align: center;
+  margin-top: 10px;
 }
-
 
 .movie-card:hover {
-    transform: scale(1.05);
-    transition: transform 0.3s ease-in-out;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  transform: scale(1.05);
+  transition: transform 0.3s ease-in-out;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
-
 .pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  
-  .pagination .page-item {
-    list-style: none;
-    margin: 0 5px;
-  }
-  
-  .pagination .page-link {
-    color: #000;
-    text-decoration: none;
-    border: 1px solid #393434;
-    padding: 5px 10px;
-    border-radius: 3px;
-    background-color: #423c3c;
-  }
-  
-  .pagination .page-item.active .page-link {
-    background-color: #770909;
-    color: #fff;
-    border: 1px solid #320505;
-  }
-  
-  .pagination .page-link:hover {
-    background-color: #7e7575;
-  }
-  
-  .pagination .page-item.disabled .page-link {
-    color: #000000;
-    background-color: rgb(41, 39, 39);
-    border: 1px solid rgb(41, 39, 39);
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
 
+.pagination .page-item {
+  list-style: none;
+  margin: 0 5px;
+}
 
-    
-  }
+.pagination .page-link {
+  color: #000;
+  text-decoration: none;
+  border: 1px solid #393434;
+  padding: 5px 10px;
+  border-radius: 3px;
+  background-color: #423c3c;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #770909;
+  color: #fff;
+  border: 1px solid #320505;
+}
+
+.pagination .page-link:hover {
+  background-color: #7e7575;
+}
+
+.pagination .page-item.disabled .page-link {
+  color: #000000;
+  background-color: rgb(41, 39, 39);
+  border: 1px solid rgb(41, 39, 39);
+}
+
+.pagination .page-item.disabled .page-link:hover {
+  background-color: transparent;
+}
+
+.movie-card div {
+  text-align: center;
+  display: flex;
   
-  .pagination .page-item.disabled .page-link:hover {
-    background-color: transparent;
-  }
+}
+
+.movie-card p {
+  text-align: center;
+  margin-bottom: 0;
+
+}
+
+.movie-card h1 {
+  text-align: center;
+  margin: 5px 0;
+  font-size: 16px;
+}
+.movie-card .heart-icon {
+  font-size: 20px;
+  margin-left: 5px;
+}
+
+.movie-card .heart-icon:hover {
+  cursor: pointer;
+  color: #ff0000;
+}

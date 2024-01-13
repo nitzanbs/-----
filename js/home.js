@@ -10,6 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentPage = 1;
   let popularity = 'day';
 
+  
+
+  
   function isMovieLiked(movieId) {
     return likedMoviesArray.some((movie) => movie.id === movieId);
   }
@@ -22,9 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const heartIconColor = isMovieLiked(movieResult.id) ? '#ff0000' : '';
 
     movieCard.innerHTML = `
-      <p>Title: ${movieResult.title} <i class="heart-icon ${heartIconClass} fa-heart" style="color: #ff0000;"></i></p>
-      <p>Release Date: ${movieResult.release_date}</p>
-      <img style="width:20%; height:auto;" src="https://image.tmdb.org/t/p/original${movieResult.poster_path}" />
+    <img style="width:100%; height:auto;" src="https://image.tmdb.org/t/p/original${movieResult.poster_path}" />
+      <h1>${movieResult.title} </h1>
+      <div><p><i class="heart-icon ${heartIconClass} fa-heart" style="color: #ff0000;"></i></p></div>
+      
+      
     `;
 
     moviesPresentation.appendChild(movieCard);
@@ -157,3 +162,64 @@ document.addEventListener('DOMContentLoaded', () => {
 
   fetchMovies(currentPage, popularity);
 });
+
+function changePage(direction) {
+  if (direction === 'Previous' && currentPage > 1) {
+    currentPage--;
+  } else if (direction === 'Next' && currentPage < totalPages) {
+    currentPage++;
+  } else if (typeof direction === 'number' && direction >= 1 && direction <= totalPages) {
+    currentPage = direction;
+  }
+
+  updatePagination();
+  fetchMovies(currentPage, popularity);
+}
+
+function changePopularity(newPopularity) {
+  if (newPopularity === 'day') {
+    popularity = 'day';
+    currentPage = 1;
+    fetchMovies(currentPage, 'day');
+  } else if (newPopularity === 'week') {
+    popularity = 'week';
+    currentPage = 1;
+    fetchMovies(currentPage, 'week');
+  }
+
+  updatePagination();
+}
+
+function fetchMovies(page = 1, popularity = 'day') {
+  let url;
+
+  if (popularity === 'day') {
+    url = `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${page}&api_key=f673b4c51255192622a586f74ec1f251`;
+  } else if (popularity === 'week') {
+    if (page >= 1 && page <= 5) {
+      const startPage = page + 9;
+      url = `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${startPage}&api_key=f673b4c51255192622a586f74ec1f251`;
+    } else {
+      console.log('nope');
+      return;
+    }
+  }
+
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      moviesPresentation.innerHTML = '';
+      data.results.forEach((movieResult) => {
+        if (movieResult.poster_path !== null) {
+          createMovieCard(movieResult);
+        }
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+fetchMovies(currentPage, popularity);
+
